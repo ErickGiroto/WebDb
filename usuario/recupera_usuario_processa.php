@@ -14,15 +14,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->fetch();
 
     if (password_verify($resposta1, $resposta1_hash) && password_verify($resposta2, $resposta2_hash) && password_verify($resposta3, $resposta3_hash)) {
-        echo "<form action='nova_senha.php' method='POST'>
-                <h2>Nova Senha</h2>
-                <input type='hidden' name='email' value='$email'>
-                <input type='password' name='nova_senha' placeholder='Nova Senha' required>
-                <button type='submit'>Alterar Senha</button>
-              </form>";
-    } else {
-        echo "Respostas incorretas. <a href='recupera_usuario.php'>Tente novamente</a>";
-    }
+    echo "<form action='nova_senha.php' method='POST'>
+            <h2>Nova Senha</h2>
+            <input type='hidden' name='email' value='" . htmlspecialchars($email) . "'>
+            <input type='password' name='nova_senha' placeholder='Nova Senha' required>
+            <button type='submit'>Alterar Senha</button>
+          </form>";
+        }else {
+            echo "Respostas incorretas. <a href='recupera_usuario.php'>Tente novamente</a>";
+        }
 
     $stmt->close();
 }
